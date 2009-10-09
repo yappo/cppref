@@ -8,6 +8,8 @@ use File::ShareDir ();
 
 our $VERSION = '0.01';
 
+my $BROWSER = $ENV{BROWSER} || 'w3m';
+
 my $doc_dir = "doc";
 eval {
     $doc_dir = File::ShareDir::dist_dir('cppref');
@@ -50,7 +52,7 @@ if (@cand == 0) {
 
 sub open_file {
     my $fn = shift;
-    exec 'w3m', $fn;
+    exec $BROWSER, $fn;
     die "failed to exec w3m:$!";
 }
 
